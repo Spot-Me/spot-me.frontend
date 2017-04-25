@@ -1,64 +1,24 @@
 {{outlet}}
 <div class="section">
-  <div class="container">
-    <div class="map-header">
-      <h1 class="map-header__attention">Find <span class="workout-partners">Workout Partners</span> Near You!</h1>
-      <button type="button" {{action 'getUserLocation'}} class="map-location">Click to Find My Location!</button>
-      {{#if userLocation}}
-        {{userLocation}}
-      {{/if}}
+  <div class="map-container">
+    <div class="container">
 
-      <div class="filter-set">
-        <button type="button" class="filter-set__button"><img src="./images/running-icon.png" alt="" class="filter-icon"></button>
-        <button type="button" class="filter-set__button"><img src="./images/cyclist-icon.png" alt="" class="filter-icon"></button>
-        <button type="button" class="filter-set__button"><img src="./images/man-lifting-icon.png" alt="" class="filter-icon"></button>
+      <div class="map-header">
+        <h1 class="map-header__attention">Find <span class="workout-partners">Workout Partners</span> Near You</h1>
+        <h2 class="map-header__direction">(Try clicking a filter below to get started!)</h2>
+
+        <div class="filter-set">
+
+          <button type="button" class="filter-set__button"><img src="./images/running-icon.png" alt="" class="filter-icon"></button>
+          <button type="button" class="filter-set__button"><img src="./images/cyclist-icon.png" alt="" class="filter-icon"></button>
+          <button type="button" class="filter-set__button"><img src="./images/man-lifting-icon.png" alt="" class="filter-icon"></button>
+
+        </div>
+
       </div>
 
-      <h2 class="map-header__direction">(Try clicking one of the filters to get started!)</h2>
-
     </div>
-  </div>
 
-  <div class="map-section">
-    <h2 class="map-header__filter">Currently Filtering Users Who Also Enjoy: {{activities}} <span class="workout-partners">Swimming</span></h2>
-    <div class="map">
-      {{#if currentUser.user.zipLatitude}}
-
-        {{#leaflet-map lat=currentUser.user.zipLatitude lng=currentUser.user.zipLongitude zoom=12 scrollWheelZoom=false class="leaflet-map" }}
-          {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-
-          {{#each model as |profile|}}
-            {{#marker-layer location=(point-array profile.latitude profile.longitude)}}
-              {{#popup-layer}}
-                <div class="results-card__info">
-                  <h2 class="results-card__name">{{profile.name}}</h2>
-                  <p class="results-card__details">{{profile.gender}} - {{profile.ageRange}}</p>
-                </div>
-                <p class="results-card__availability">{{profile.availability}}</p>
-                <div class="results-card__activities">
-                  <img src="./images/man-lifting-icon.png" alt="" class="activity-icon">
-                  <img src="./images/man-lifting-icon.png" alt="" class="activity-icon">
-                  <img src="./images/man-lifting-icon.png" alt="" class="activity-icon">
-                </div>
-              {{/popup-layer}}
-            {{/marker-layer}}
-          {{/each}}
-        {{/leaflet-map}}
-      {{/if}}
-
-    </div>
-  </div>
-  <div class="results-container">
-    <div class="results-grid">
-      {{#each model as |profile|}}
-        <div class="results-grid__item">
-          <div class="results-card">
-            <div class="results-card__info">
-              <h2 class="results-card__name">{{profile.name}}</h2>
-              <p class="results-card__details">{{profile.gender}} - {{profile.ageRange}}</p>
-            </div>
-          </div>
-        </div>
     <div class="map-section">
       <h2 class="map-header__filter">Currently Filtering Users Who Also Enjoy: {{activities}} <span class="workout-partners">Swimming</span></h2>
       <div class="map">
@@ -88,37 +48,51 @@
           {{/leaflet-map}}
         {{/if}}
 
-            <div class="user-details">
-
-
-              <div class="wizard-card">
-                <p class="wizard-card__headline">Activities</p>
-                <ul class="wizard-list">
-                  {{#each profile.activities as |activity|}}
-                    <li class="wizard-list__item">{{activity}}</li>
-                  {{/each}}
-                </ul>
+      </div>
+    </div>
+    {{!-- TEST --}}
+    <div class="results-container">
+      <div class="results-grid">
+        {{#each model as |profile|}}
+          <div class="results-grid__item">
+            <div class="results-card">
+              <div class="results-card__info">
+                <h2 class="results-card__name">{{profile.name}}</h2>
+                <p class="results-card__details">{{profile.gender}} - {{profile.ageRange}}</p>
               </div>
 
-              <div class="wizard-card">
-                <p class="wizard-card__headline">Availability</p>
-                <ul class="wizard-list">
-                  {{#each profile.availabilities as |availability|}}
-                    <li class="wizard-list__item">{{availability}}</li>
-                  {{/each}}
-                </ul>
+              <div class="user-details">
+
+                <div class="wizard-card">
+                  <p class="wizard-card__headline">Activities</p>
+                  <ul class="wizard-list">
+                    {{#each profile.activities as |activity|}}
+                      <li class="wizard-list__item">{{activity}}</li>
+                    {{/each}}
+                  </ul>
+                </div>
+
+                <div class="wizard-card">
+                  <p class="wizard-card__headline">Availability</p>
+                  <ul class="wizard-list">
+                    {{#each profile.availabilities as |availability|}}
+                      <li class="wizard-list__item">{{availability}}</li>
+                    {{/each}}
+                  </ul>
+                </div>
+
               </div>
 
             </div>
-
           </div>
-        </div>
-      {{/each}}
+        {{/each}}
 
-      {{!-- <li class="results-list__item">Profile</li>
+        {{!-- <li class="results-list__item">Profile</li>
         <li class="results-list__item">Profile</li>
         <li class="results-list__item">Profile</li>
         <li class="results-list__item">Profile</li> --}}
+
+      </div>
 
     </div>
 

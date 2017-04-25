@@ -5,7 +5,7 @@ module.exports = function(environment) {
   let ENV = {
 
     DS: {
-      host: 'http://spotme-api.herokuapp.com',
+      host: 'http://localhost:8080',
     },
 
     modulePrefix: 'spot-me',
@@ -49,7 +49,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.DS.host = 'http://spotme-api.herokuapp.com';
   }
 
   ENV['ember-simple-auth'] = {
