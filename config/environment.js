@@ -49,7 +49,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.DS.host = 'http://spotme-api.herokuapp.com';
+    ENV.DS.host = 'https://spotme-api.herokuapp.com';
   }
 
   ENV['ember-simple-auth'] = {
